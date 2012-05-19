@@ -50,13 +50,17 @@ class LtsController < ApplicationController
   end
 
   def like
+    Lt.update_counters params[:lt_id], :like_count => 1
     @lt = Lt.find(params[:lt_id])
-    @lt.countup
+
+    render xml: @lt, status: :created, location: @lt
   end
 
   def unlike
+    Lt.update_counters params[:lt_id], :like_count => -1
     @lt = Lt.find(params[:lt_id])
-    @lt.countdown
+
+    render xml: @lt, status: :created, location: @lt
   end
 
 end
