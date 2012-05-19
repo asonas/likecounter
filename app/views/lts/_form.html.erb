@@ -1,0 +1,21 @@
+<%= form_for(@lt) do |f| %>
+  <% if @lt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lt.errors.count, "error") %> prohibited this lt from being saved:</h2>
+
+      <ul>
+      <% @lt.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :like_count %><br />
+    <%= f.number_field :like_count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

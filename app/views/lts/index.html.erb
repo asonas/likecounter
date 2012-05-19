@@ -1,0 +1,23 @@
+<h1>Listing lts</h1>
+
+<table>
+  <tr>
+    <th>Like count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lts.each do |lt| %>
+  <tr>
+    <td><%= lt.like_count %></td>
+    <td><%= link_to 'Show', lt %></td>
+    <td><%= link_to 'Edit', edit_lt_path(lt) %></td>
+    <td><%= link_to 'Destroy', lt, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lt', new_lt_path %>
