@@ -18,6 +18,7 @@ class LtsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @lt }
+      format.xml { render xml: @lt, status: :created, location: @lt }
     end
   end
 
@@ -30,11 +31,6 @@ class LtsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @lt }
     end
-  end
-
-  # GET /lts/1/edit
-  def edit
-    @lt = Lt.find(params[:id])
   end
 
   # POST /lts
@@ -53,31 +49,14 @@ class LtsController < ApplicationController
     end
   end
 
-  # PUT /lts/1
-  # PUT /lts/1.json
-  def update
-    @lt = Lt.find(params[:id])
-
-    respond_to do |format|
-      if @lt.update_attributes(params[:lt])
-        format.html { redirect_to @lt, notice: 'Lt was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @lt.errors, status: :unprocessable_entity }
-      end
-    end
+  def like
+    @lt = Lt.find(params[:lt_id])
+    @lt.countup
   end
 
-  # DELETE /lts/1
-  # DELETE /lts/1.json
-  def destroy
-    @lt = Lt.find(params[:id])
-    @lt.destroy
-
-    respond_to do |format|
-      format.html { redirect_to lts_url }
-      format.json { head :no_content }
-    end
+  def unlike
+    @lt = Lt.find(params[:lt_id])
+    @lt.countdown
   end
+
 end
